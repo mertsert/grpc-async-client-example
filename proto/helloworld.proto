@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+service HelloWorldService {
+  rpc RegisterService(RegisterRequest) returns (RegisterReply) {}
+  rpc BidirectStreaming(stream BidiMessage) returns (stream BidiMessage) {}
+  rpc ClientStreaming(stream ClientStreamMessage)
+      returns (ClientStreamResonse) {}
+}
+
+message RegisterRequest {
+  string name = 1; 
+  string type = 2;     
+}
+
+message RegisterReply {
+  bool status = 1; 
+  string reason = 2; 
+}
+
+message BidiMessage {
+  string sender = 1;  
+  string payload = 3;
+}
+
+message ClientStreamResonse { string response = 1; }
+
+message ClientStreamMessage { bytes metricsChunk = 1; }
